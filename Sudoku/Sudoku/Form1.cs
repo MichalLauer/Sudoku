@@ -12,9 +12,18 @@ namespace Sudoku
 {
     public partial class Form1 : Form
     {
+        private Sudoku sudoku;
+
         public Form1()
         {
             InitializeComponent();
+            sudoku = new Sudoku();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            SudokuGenerator.Generate(sudoku);
+            richTextBox1.Text = sudoku.ToString();
         }
     }
 }
