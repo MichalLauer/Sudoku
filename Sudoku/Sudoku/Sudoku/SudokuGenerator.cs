@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Sudoku
 {
@@ -11,26 +12,44 @@ namespace Sudoku
         private static DataValidator validator = new DataValidator();
         public static void Generate(Sudoku sudoku)
         {
-            for (int i = 0; i < 9; i++)
+            for (int radek = 0 ; radek < 9;)
             {
-                for (int j = 0, value = 1; j < 9;)
+                for (int sloupec = 0; ;)
                 {
-                    sudoku.data[i][j] = value;
-                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, i)) &&
-                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, j)) &&
-                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, i, j)))
+                        sudoku.data[radek][sloupec]++;
+                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, radek)) &&
+                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, sloupec)) &&
+                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, radek, sloupec)))
                     {
-                        j++;
-                        continue;
+                        if (sloupec == 8)
+                        {
+                            radek++;
+                            break;
+                        }
+                        else
+                            sloupec++;
+                        continue ;
                     }
-                    value++;
-                    if (j == 1)
+                    //if data==9, then there is no correct number
+                    //else data++
+                    if (sudoku.data[radek][sloupec] == 9)
                     {
-                        i = -2;
-                        break;
+                        //reset this bubble of data
+                        sudoku.data[radek][sloupec] = 0;
+                        //if sloupec==0; then we have to go up by one
+                        if (sloupec == 0)
+                        {
+                            radek--;
+                            sloupec = 8;
+                            break;
+                        }
+                        sloupec--;
+                        while(sudoku.data[radek][sloupec] == 9)
+                        {
+                            sudoku.data[radek][sloupec] = 0;
+                            sloupec--;
+                        }
                     }
-                    if (value == 10)
-                        value = sudoku.data[i][j=-1]+1;
                 }
             }
             

@@ -10,10 +10,12 @@ namespace Sudoku
     {
         public override bool IsValid(int[] column)
         {
+            //remove all 0s from row
+            column = column.Where(x => x != 0).ToArray();
             //Removes all duplicates
-            int[] fixedRow = column.Distinct().ToArray();
+            int[] fixedColumn = column.Distinct().ToArray();
             //If there were no duplicates, the length is equal
-            return fixedRow.Length == column.Length;
+            return fixedColumn.Length == column.Length;
         }
     }
 }

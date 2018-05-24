@@ -24,6 +24,9 @@ namespace Sudoku
         {
             SudokuGenerator.Generate(sudoku);
             richTextBox1.Text = sudoku.ToString();
+            //int[] s = Sudoku.GetSquare(sudoku, 6, 6);
+            //foreach (int item in s)
+            //    richTextBox1.Text += item.ToString();
         }
     }
 }
