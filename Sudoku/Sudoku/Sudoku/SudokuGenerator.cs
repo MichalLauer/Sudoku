@@ -14,43 +14,51 @@ namespace Sudoku
         {
             for (int radek = 0 ; radek < 9;)
             {
-                for (int sloupec = 0; ;)
-                {
-                        sudoku.data[radek][sloupec]++;
-                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, radek)) &&
-                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, sloupec)) &&
-                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, radek, sloupec)))
-                    {
-                        if (sloupec == 8)
-                        {
-                            radek++;
-                            break;
-                        }
-                        else
-                            sloupec++;
-                        continue ;
-                    }
-                    //if data==9, then there is no correct number
-                    //else data++
-                    if (sudoku.data[radek][sloupec] == 9)
-                    {
-                        //reset this bubble of data
-                        sudoku.data[radek][sloupec] = 0;
-                        //if sloupec==0; then we have to go up by one
-                        if (sloupec == 0)
-                        {
-                            radek--;
-                            sloupec = 8;
-                            break;
-                        }
-                        sloupec--;
-                        while(sudoku.data[radek][sloupec] == 9)
-                        {
-                            sudoku.data[radek][sloupec] = 0;
-                            sloupec--;
-                        }
-                    }
-                }
+
+				for (int sloupec = 0; ;)
+				{
+					sudoku.data[radek][sloupec]++;
+					if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, radek)) &&
+						DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, sloupec)) &&
+						DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, radek, sloupec)))
+					{
+						if (sloupec == 8)
+						{
+							radek++;
+							if (radek == 8)
+								;
+							break;
+						}
+						sloupec++;
+						continue;
+					}
+					while (sudoku.data[radek][sloupec] == 9)
+					{
+						sudoku.data[radek][sloupec] = 0;
+						if (sloupec == 0)
+						{
+							radek--;
+							sloupec = 8;
+						}
+						else
+							sloupec--;
+					}
+					////if data==9, then there is no correct number
+					////else data++
+					//if (sudoku.data[radek][sloupec] == 9)
+					//{
+					//	//reset this bubble of data
+					//	sudoku.data[radek][sloupec] = 0;
+					//	//if sloupec==0; then we have to go up by one
+					//	if (sloupec == 0)
+					//	{
+					//		radek--;
+					//		sloupec = 8;
+					//		break;
+					//	}
+					//	sloupec--;
+					//}
+				}
             }
             
         }

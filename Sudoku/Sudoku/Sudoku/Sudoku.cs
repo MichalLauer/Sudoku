@@ -38,8 +38,8 @@ namespace Sudoku
 
         public static int[] GetSquare(Sudoku sudoku, int rowIndex, int columnIndex)
         {
-            int startRow = (8 / 3) * 3;
-            int startCol = (8 / 3) * 3;
+            int startRow = (rowIndex / 3) * 3;
+            int startCol = (columnIndex / 3) * 3;
             int[] retSquare = new int[9];
             for(int i = 0, index = 0; i < 3; i++)
             {
@@ -54,7 +54,7 @@ namespace Sudoku
         public override string ToString()
         {
             string output = "";
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
                     output += $" {data[i][j]} ";

@@ -16,3 +16,13 @@ C:\Users\Darth Wader\Desktop\projektik\Michalek\Sudoku\Sudoku\obj\Debug\Sudoku.c
 C:\Users\Darth Wader\Desktop\projektik\Michalek\Sudoku\Sudoku\obj\Debug\Sudoku.Form1.resources
 C:\Users\Darth Wader\Desktop\projektik\Michalek\Sudoku\Sudoku\obj\Debug\Sudoku.Properties.Resources.resources
 C:\Users\Darth Wader\Desktop\projektik\Michalek\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.Cache
+I:\_GitHub\Sudoku\Sudoku\Sudoku\bin\Debug\Sudoku.exe.config
+I:\_GitHub\Sudoku\Sudoku\Sudoku\bin\Debug\Sudoku.exe
+I:\_GitHub\Sudoku\Sudoku\Sudoku\bin\Debug\Sudoku.pdb
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.Form1.resources
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.Properties.Resources.resources
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.cache
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.CoreCompileInputs.cache
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.exe
+I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
