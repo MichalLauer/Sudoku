@@ -51,6 +51,11 @@ namespace Sudoku
             return retSquare;
         }
 
+        public void Generate()
+        {
+            SudokuGenerator.Generate(this);
+        }
+
         public override string ToString()
         {
             string output = "";

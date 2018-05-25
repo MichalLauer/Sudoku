@@ -10,29 +10,28 @@ namespace Sudoku
     class SudokuGenerator
     {
         private static DataValidator validator = new DataValidator();
+
         public static void Generate(Sudoku sudoku)
         {
-            for (int radek = 0 ; radek < 9;)
+            Randomize(sudoku);
+            for (int radek = 1 ; radek < 9;)
             {
-
 				for (int sloupec = 0; ;)
 				{
-					sudoku.data[radek][sloupec]++;
-					if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, radek)) &&
-						DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, sloupec)) &&
-						DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, radek, sloupec)))
-					{
-						if (sloupec == 8)
+                    sudoku.data[radek][sloupec]++;
+                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, radek)) &&
+                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, sloupec)) &&
+                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, radek, sloupec)))
+                    {
+                        if (sloupec == 8)
 						{
 							radek++;
-							if (radek == 8)
-								;
 							break;
 						}
 						sloupec++;
 						continue;
 					}
-					while (sudoku.data[radek][sloupec] == 9)
+                    while (sudoku.data[radek][sloupec] >= 9)
 					{
 						sudoku.data[radek][sloupec] = 0;
 						if (sloupec == 0)
@@ -43,24 +42,22 @@ namespace Sudoku
 						else
 							sloupec--;
 					}
-					////if data==9, then there is no correct number
-					////else data++
-					//if (sudoku.data[radek][sloupec] == 9)
-					//{
-					//	//reset this bubble of data
-					//	sudoku.data[radek][sloupec] = 0;
-					//	//if sloupec==0; then we have to go up by one
-					//	if (sloupec == 0)
-					//	{
-					//		radek--;
-					//		sloupec = 8;
-					//		break;
-					//	}
-					//	sloupec--;
-					//}
 				}
             }
             
+        }
+
+        private static void Randomize(Sudoku sudoku)
+        {
+            Random rn = new Random();
+            for (int i = 0; i < 9;)
+            {
+                int temp = rn.Next(1, 10);
+                if (sudoku.data[0].Contains(temp))
+                    continue;
+                sudoku.data[0][i] = temp;
+                i++;
+            }
         }
     }
 }
