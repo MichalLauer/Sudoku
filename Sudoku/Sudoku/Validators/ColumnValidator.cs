@@ -8,6 +8,11 @@ namespace Sudoku
 {
     class ColumnValidator : DataValidator
     {
+		/// <summary>
+		/// Checks whether the column is acceptable
+		/// </summary>
+		/// <param name="column">Column of ints</param>
+		/// <returns>Boolean of the Column state</returns>
         public override bool IsValid(int[] column)
         {
             //remove all 0s from row

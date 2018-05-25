@@ -8,7 +8,12 @@ namespace Sudoku
 {
     class SquareValidator : DataValidator
     {
-        public override bool IsValid(int[] square)
+		/// <summary>
+		/// Checks whether the square is acceptable
+		/// </summary>
+		/// <param name="square">square of ints</param>
+		/// <returns>Boolean of the square state</returns>
+		public override bool IsValid(int[] square)
         {
             //remove all 0s from row
             square = square.Where(x => x != 0).ToArray();

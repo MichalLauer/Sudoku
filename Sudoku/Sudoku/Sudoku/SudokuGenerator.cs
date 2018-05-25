@@ -11,42 +11,54 @@ namespace Sudoku
     {
         private static DataValidator validator = new DataValidator();
 
+		/// <summary>
+		/// Algorithm to generate new sudoku 
+		/// </summary>
+		/// <param name="sudoku"></param>
         public static void Generate(Sudoku sudoku)
         {
             Randomize(sudoku);
-            for (int radek = 1 ; radek < 9;)
+			//skips first row, because it's randomly generated
+            for (int row = 1 ; row < 9;)
             {
-				for (int sloupec = 0; ;)
+				for (int col = 0; ;)
 				{
-                    sudoku.data[radek][sloupec]++;
-                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, radek)) &&
-                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, sloupec)) &&
-                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, radek, sloupec)))
+                    sudoku.data[row][col]++;
+					//Checks if the value is acceptable
+                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku, row)) &&
+                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku, col)) &&
+                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku, row, col)))
                     {
-                        if (sloupec == 8)
+						//if is on the end of a row
+                        if (col == 8)
 						{
-							radek++;
+							row++;
 							break;
 						}
-						sloupec++;
+						col++;
 						continue;
 					}
-                    while (sudoku.data[radek][sloupec] >= 9)
+					//Goes back untill you can raise the value by 1
+                    while (sudoku.data[row][col] >= 9)
 					{
-						sudoku.data[radek][sloupec] = 0;
-						if (sloupec == 0)
+						sudoku.data[row][col] = 0;
+						if (col == 0)
 						{
-							radek--;
-							sloupec = 8;
+							row--;
+							col = 8;
 						}
 						else
-							sloupec--;
+							col--;
 					}
 				}
             }
             
         }
 
+		/// <summary>
+		/// Randomizes first row of the sudoku
+		/// </summary>
+		/// <param name="sudoku"></param>
         private static void Randomize(Sudoku sudoku)
         {
             Random rn = new Random();
