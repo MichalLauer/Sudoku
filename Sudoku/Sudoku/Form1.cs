@@ -17,12 +17,15 @@ namespace Sudoku
         public Form1()
         {
             InitializeComponent();
-            sudoku = new Sudoku();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-			sudoku.Generate();
-        }
-    }
+			sudoku = new Sudoku(true);
+			UI.CreateFormUI(this);
+			UI.CreateInterface(this);
+			UI.CreateSudokuUI(this);
+			UI.Fill(sudoku, true);
+		}
+	}
 }

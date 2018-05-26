@@ -27,7 +27,13 @@ namespace Sudoku
 		/// <summary>
 		/// Index of randomly generated row
 		/// </summary>
-		public int RandomRow { get; set; } = 0;
+		public int VisibleElements { get; set; } = 20;
+
+		public Sudoku(bool generate = false)
+		{
+			if (generate)
+				Generate();
+		}
 
 		/// <summary>
 		/// Returns an int array of numbers in specified row
