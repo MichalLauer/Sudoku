@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace Sudoku
+namespace Sudoku.Validators
 {
     class  DataValidator
     {
@@ -40,9 +41,9 @@ namespace Sudoku
 		/// <returns>Boolean of input's state</returns>
         public static bool IsValidInput(string input)
         {
-            //get if users input is valid
-            //return boolean
-            return true;
+			//get if users input is valid
+			//return boolean
+			return Regex.IsMatch(input, "^[1-9]$");
         }
     }
 }

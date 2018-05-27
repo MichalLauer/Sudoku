@@ -63,6 +63,7 @@
     <Compile Include="Validators\RowValidator.cs" />
     <Compile Include="Validators\SquareValidator.cs" />
     <Compile Include="Sudoku\SudokuGenerator.cs" />
+    <Compile Include="Validators\SudokuValidator.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

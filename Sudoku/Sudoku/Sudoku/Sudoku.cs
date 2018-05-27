@@ -24,11 +24,29 @@ namespace Sudoku
             new int[]{0,0,0,0,0,0,0,0,0 },
         };
 
+
+		public int[][] usersData =
+		{
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+		};
+
 		/// <summary>
 		/// Index of randomly generated row
 		/// </summary>
 		public int VisibleElements { get; set; } = 20;
 
+		/// <summary>
+		/// Public constructor
+		/// </summary>
+		/// <param name="generate">Generate new Sudoku</param>
 		public Sudoku(bool generate = false)
 		{
 			if (generate)
@@ -41,9 +59,9 @@ namespace Sudoku
 		/// <param name="sudoku">Sudoku to fetch the row from</param>
 		/// <param name="rowIndex">index of the desired row</param>
 		/// <returns>Int array</returns>
-        public static int[] GetRow(Sudoku sudoku, int rowIndex)
+        public static int[] GetRow(int[][] sentData, int rowIndex)
         {
-            return sudoku.data[rowIndex];
+            return sentData[rowIndex];
         }
 
 		/// <summary>
@@ -52,13 +70,13 @@ namespace Sudoku
 		/// <param name="sudoku">Sudoku to fetch the column from</param>
 		/// <param name="columnIndex">index of the desired column</param>
 		/// <returns>Int array</returns>
-		public static int[] GetColumn(Sudoku sudoku, int columnIndex)
+		public static int[] GetColumn(int[][] sentData, int columnIndex)
         {
             int[] retColumn = new int[9];
             for (int i = 0; i < 9; i++)
                 for (int j = 0; j < 9; j++)
                     if (j == columnIndex)
-                        retColumn[i] = sudoku.data[i][j];
+                        retColumn[i] = sentData[i][j];
             return retColumn;
         }
 
@@ -69,7 +87,7 @@ namespace Sudoku
 		/// <param name="rowIndex">Index of the row</param>
 		/// <param name="columnIndex">Index of the column</param>
 		/// <returns>Int array</returns>
-		public static int[] GetSquare(Sudoku sudoku, int rowIndex, int columnIndex)
+		public static int[] GetSquare(int[][] sentData, int rowIndex, int columnIndex)
         {
             int startRow = (rowIndex / 3) * 3;
             int startCol = (columnIndex / 3) * 3;
@@ -78,7 +96,7 @@ namespace Sudoku
             {
                 for(int j=0;j<3;j++, index++)
                 {
-                    retSquare[index] = sudoku.data[startRow+i][startCol+j];
+                    retSquare[index] = sentData[startRow+i][startCol+j];
                 }
             }
             return retSquare;

@@ -14,14 +14,14 @@ namespace Sudoku
 		public static void CreateFormUI(Form form)
 		{
 			form.FormBorderStyle = FormBorderStyle.None;
-			form.Size = new Size(410, 500);
+			form.Size = new Size(410, 207);
 			form.WindowState = FormWindowState.Normal;
 			form.StartPosition = FormStartPosition.Manual;
 			form.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - form.Size.Width / 2,
 									  Screen.PrimaryScreen.Bounds.Height / 2 - form.Size.Height / 2);
 		}
 
-		public static void CreateSudokuUI(Form form)
+		public static void CreateSudokuUI(Form1 form)
 		{
 			UIManager.RichTextBoxes = new RichTextBox[9, 9];
 			for (int i = 0; i < 9; i++)
@@ -37,19 +37,32 @@ namespace Sudoku
 						Parent = form,
 						Location = new Point(x, y),
 						SelectionAlignment = HorizontalAlignment.Center,
-						MaxLength = 1
+						MaxLength = 1,
+						BackColor = Color.White,
+						Tag = $"{i}-{j}"
 					};
+					rtb.TextChanged += new EventHandler(form.rtb_TextChanged);
 					UIManager.RichTextBoxes[i,j] = rtb;
 				}
 			}
 		}
 
-		public static void CreateInterface(Form form)
+		public static void ResetSudokuUI(Sudoku sudoku)
+		{
+			foreach (RichTextBox item in UIManager.RichTextBoxes)
+			{
+				item.BackColor = Color.White;
+				item.Text = "";
+				item.ReadOnly = false;
+			}
+		}
+
+		public static void CreateInterface(Form1 form)
 		{
 			Button btnReset = new Button()
 			{
-				Text = "Resetovat sudoku",
-				Size = new Size(200, 40),
+				Text = "Resetovat Sudoku",
+				Size = new Size(200, 45),
 				Location = new Point(200, 10),
 				Parent = form
 			};
@@ -57,18 +70,41 @@ namespace Sudoku
 			Button btnCheck = new Button()
 			{
 				Text = "Zkontrolovat Sudoku",
-				Size = new Size(200, 40),
-				Location = new Point(200, 50),
+				Size = new Size(200, 45),
+				Location = new Point(200, 57),
 				Parent = form
 			};
+
+			Button btnGenerate = new Button()
+			{
+				Text = "Znovu vygenerovat Sudoku",
+				Size = new Size(200, 45),
+				Location = new Point(200, 105),
+				Parent = form
+			};
+
+			Button btnEnd = new Button()
+			{
+				Text = "Ukoncit Sudoku",
+				Size = new Size(200, 45),
+				Location = new Point(200, 152),
+				Parent = form
+			};
+			btnReset.MouseDown += new MouseEventHandler(form.btnReset_Down);
+			btnCheck.MouseDown += new MouseEventHandler(form.btnCheck_Down);
+			btnGenerate.MouseDown += new MouseEventHandler(form.btnGenerate_Down);
+			btnEnd.MouseDown += new MouseEventHandler(form.btnEnd_Down);
 		}
 
-		public static void Fill(Sudoku sudoku, bool hideAll = false)
+		public static void Fill(Sudoku sudoku, bool hideAll = false, bool generateNew = true)
 		{
 			if (hideAll)
 				HideAllElements();
 			//show random 20 elements
-			GenerateVisibleElements(sudoku);
+			if (generateNew)
+			{
+				GenerateVisibleElements(sudoku);
+			}
 			for (int i = 0; i < sudoku.VisibleElements; i++)
 			{
 				int x = UIManager.VisibleRtbs[i, 0];
