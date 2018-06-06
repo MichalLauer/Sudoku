@@ -1,4 +1,4 @@
-﻿namespace Sudoku
+﻿namespace SudokuApp
 {
     partial class Form1
     {

@@ -7,9 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sudoku.Validators;
 
-namespace Sudoku
+namespace SudokuApp
 {
     public partial class Form1 : Form
     {
@@ -31,13 +30,13 @@ namespace Sudoku
 
 		public void btnReset_Down(object sender, MouseEventArgs e)
 		{
-			UI.ResetSudokuUI(sudoku);
+			UI.ResetSudokuUI();
 			UI.Fill(sudoku, false, false);
 		}
 
 		public  void btnCheck_Down(object sender, MouseEventArgs e)
 		{
-			if (!SudokuValidator.IsValid(sudoku))
+			if (!DataValidator.SudokuVal.IsValid(sudoku))
 				return;
 
 			DialogResult dr = MessageBox.Show("Vyhrali ste. JUPIIIIIIII! <3 <3 <3 <3 <3 <3\nPřejete si hrát znovu?", "Winner", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -49,7 +48,7 @@ namespace Sudoku
 
 		public void btnGenerate_Down(object sender, MouseEventArgs e)
 		{
-			UI.ResetSudokuUI(sudoku);
+			UI.ResetSudokuUI();
 			UI.Fill(sudoku);
 		}
 
@@ -71,7 +70,7 @@ namespace Sudoku
 			}
 			rtb.BackColor = Color.White;
 			string[] indexes = rtb.Tag.ToString().Split('-').ToArray();
-			sudoku.usersData[int.Parse(indexes[0])][int.Parse(indexes[1])] = int.Parse(input);
+			sudoku.currentSudoku[int.Parse(indexes[0])][int.Parse(indexes[1])] = int.Parse(input);
 		}
 	}
 }

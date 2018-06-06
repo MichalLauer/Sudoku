@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sudoku
+namespace SudokuApp
 {
     class Sudoku
     {
@@ -24,8 +24,10 @@ namespace Sudoku
             new int[]{0,0,0,0,0,0,0,0,0 },
         };
 
-
-		public int[][] usersData =
+        /// <summary>
+        /// Sudoku data of the game
+        /// </summary>
+		public int[][] currentSudoku =
 		{
 			new int[]{0,0,0,0,0,0,0,0,0 },
 			new int[]{0,0,0,0,0,0,0,0,0 },

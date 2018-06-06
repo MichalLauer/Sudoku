@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 
 
-namespace Sudoku
+namespace SudokuApp
 {
 	class UI
 	{
+        /// <summary>
+        /// Sets Form to it's proper looks
+        /// </summary>
+        /// <param name="form">Form to change</param>
 		public static void CreateFormUI(Form form)
 		{
 			form.FormBorderStyle = FormBorderStyle.None;
@@ -21,6 +21,10 @@ namespace Sudoku
 									  Screen.PrimaryScreen.Bounds.Height / 2 - form.Size.Height / 2);
 		}
 
+        /// <summary>
+        /// Creates UI for Sudoku
+        /// </summary>
+        /// <param name="form">Form to create Sudoku on</param>
 		public static void CreateSudokuUI(Form1 form)
 		{
 			UIManager.RichTextBoxes = new RichTextBox[9, 9];
@@ -47,7 +51,10 @@ namespace Sudoku
 			}
 		}
 
-		public static void ResetSudokuUI(Sudoku sudoku)
+        /// <summary>
+        /// Resets Sudoku look
+        /// </summary>
+		public static void ResetSudokuUI()
 		{
 			foreach (RichTextBox item in UIManager.RichTextBoxes)
 			{
@@ -57,6 +64,10 @@ namespace Sudoku
 			}
 		}
 
+        /// <summary>
+        /// Create interface that user comunicates on
+        /// </summary>
+        /// <param name="form">Form to create interface on</param>
 		public static void CreateInterface(Form1 form)
 		{
 			Button btnReset = new Button()
@@ -96,6 +107,12 @@ namespace Sudoku
 			btnEnd.MouseDown += new MouseEventHandler(form.btnEnd_Down);
 		}
 
+        /// <summary>
+        /// Fills Sudoku Interface with its proper values
+        /// </summary>
+        /// <param name="sudoku">Sudoku to fill</param>
+        /// <param name="hideAll">Whether all elements should be hidden</param>
+        /// <param name="generateNew">Whether generate new visible elements</param>
 		public static void Fill(Sudoku sudoku, bool hideAll = false, bool generateNew = true)
 		{
 			if (hideAll)
@@ -115,12 +132,23 @@ namespace Sudoku
 			}
 		}
 
+        /// <summary>
+        /// Hides all elements from the SudokuUI
+        /// </summary>
 		public static void HideAllElements()
 		{
 			foreach (RichTextBox rtb in UIManager.RichTextBoxes)
-				rtb.Text = "";
+            {
+                rtb.Text = "";
+                rtb.ReadOnly = false;
+            }
+
 		}
 
+        /// <summary>
+        /// Generates random elements that user sees to solve the sudoku
+        /// </summary>
+        /// <param name="sudoku">Sudoku to pick random elements from</param>
 		public static void GenerateVisibleElements(Sudoku sudoku)
 		{
 			UIManager.VisibleRtbs = new int[sudoku.VisibleElements, 2];

@@ -26,3 +26,12 @@ I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.cache
 I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.CoreCompileInputs.cache
 I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.exe
 I:\_GitHub\Sudoku\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
+Z:\PVA\3\Projekt\Sudoku\Sudoku\bin\Debug\Sudoku.exe.config
+Z:\PVA\3\Projekt\Sudoku\Sudoku\obj\Debug\Sudoku.exe
+Z:\PVA\3\Projekt\Sudoku\Sudoku\obj\Debug\Sudoku.pdb
+Z:\PVA\3\Projekt\Sudoku\Sudoku\bin\Debug\Sudoku.exe
+Z:\PVA\3\Projekt\Sudoku\Sudoku\bin\Debug\Sudoku.pdb
+Z:\PVA\3\Projekt\Sudoku\Sudoku\obj\Debug\Sudoku.csprojResolveAssemblyReference.cache
+Z:\PVA\3\Projekt\Sudoku\Sudoku\obj\Debug\Sudoku.Properties.Resources.resources
+Z:\PVA\3\Projekt\Sudoku\Sudoku\obj\Debug\Sudoku.csproj.GenerateResource.Cache
+Z:\PVA\3\Projekt\Sudoku\Sudoku\obj\Debug\SudokuApp.Form1.resources

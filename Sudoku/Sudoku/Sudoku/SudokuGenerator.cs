@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using Sudoku.Validators;
 
-namespace Sudoku
+namespace SudokuApp
 {
     class SudokuGenerator
     {
@@ -22,9 +21,9 @@ namespace Sudoku
 				{
                     sudoku.data[row][col]++;
 					//Checks if the value is acceptable
-                    if (DataValidator.Row.IsValid(Sudoku.GetRow(sudoku.data, row)) &&
-                        DataValidator.Column.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
-                        DataValidator.Square.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
+                    if (DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, row)) &&
+                        DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
+                        DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
                     {
 						//if is on the end of a row
                         if (col == 8)
