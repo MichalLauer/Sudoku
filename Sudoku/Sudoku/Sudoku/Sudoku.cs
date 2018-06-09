@@ -111,6 +111,26 @@ namespace Sudoku
         }
 
 		/// <summary>
+		/// Loads data from RichTextBoxes
+		/// </summary>
+		public void LoadData()
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				for (int j = 0; j < 9; j++)
+				{
+					if (UIManager.RichTextBoxes[i, j].Text == "")
+						data[i][j] = 0;
+					else
+					{
+						SolidNumbers
+					}
+				}
+			}
+		}
+
+
+		/// <summary>
 		/// Returns all values in the Sudoku
 		/// </summary>
 		/// <returns>String with all sudoku values</returns>

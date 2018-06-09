@@ -73,5 +73,20 @@ namespace Sudoku
 			string[] indexes = rtb.Tag.ToString().Split('-').ToArray();
 			sudoku.usersData[int.Parse(indexes[0])][int.Parse(indexes[1])] = int.Parse(input);
 		}
+
+		public void btnShowSolution_Down(object sender, MouseEventArgs e)
+		{
+			UI.ShowSudoku(sudoku);
+		}
+
+		public void btnCustom_Down(object sender, MouseEventArgs e)
+		{
+			UI.ResetSudokuUI(sudoku);
+		}
+
+		public void btnSolve_Down(object sender, MouseEventArgs e)
+		{
+			sudoku = new Sudoku();
+		}
 	}
 }
