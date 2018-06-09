@@ -5,24 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
-namespace Sudoku.Validators
+namespace SudokuApp
 {
     class  DataValidator
     {
 		/// <summary>
 		/// Instance of Row Validator
 		/// </summary>
-        public static RowValidator Row { get; private set; } = new RowValidator();
+        public static RowValidator RowVal { get; private set; } = new RowValidator();
 
 		/// <summary>
 		/// Instance of ColumnValidator
 		/// </summary>
-        public static ColumnValidator Column { get; private set; } = new ColumnValidator();
+        public static ColumnValidator ColumnVal { get; private set; } = new ColumnValidator();
 
 		/// <summary>
 		/// Instance of SquareValidator
 		/// </summary>
-        public static SquareValidator Square { get; private set; } = new SquareValidator();
+        public static SquareValidator SquareVal { get; private set; } = new SquareValidator();
+
+        /// <summary>
+        /// Instance of SudokuValidator
+        /// </summary>
+        public static SudokuValidator SudokuVal { get; private set; } = new SudokuValidator();
 
 		/// <summary>
 		/// IsValid method that is iherited by other classes
@@ -34,11 +39,21 @@ namespace Sudoku.Validators
             return true;
         }
 
-		/// <summary>
-		/// Checks whether the input is valid
-		/// </summary>
-		/// <param name="input">Users input</param>
-		/// <returns>Boolean of input's state</returns>
+        /// <summary>
+        /// IsValid method that checks Sudoku
+        /// </summary>
+        /// <param name="sudoku">Sudoku to check</param>
+        /// <returns></returns>
+        public virtual bool IsValid(Sudoku sudoku)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Checks whether the input is valid
+        /// </summary>
+        /// <param name="input">Users input</param>
+        /// <returns>Boolean of input's state</returns>
         public static bool IsValidInput(string input)
         {
 			//get if users input is valid

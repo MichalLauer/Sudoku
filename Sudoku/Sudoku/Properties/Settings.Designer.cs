@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sudoku.Properties
+namespace SudokuApp.Properties
 {
 
 

@@ -4,28 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sudoku
+namespace SudokuApp
 {
-    class Sudoku
-    {
+	class Sudoku
+	{
 		/// <summary>
 		/// The data of sudoku
 		/// </summary>
-        public int[][] data =
-        {
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-            new int[]{0,0,0,0,0,0,0,0,0 },
-        };
-
-
-		public int[][] usersData =
+		public int[][] data =
 		{
 			new int[]{0,0,0,0,0,0,0,0,0 },
 			new int[]{0,0,0,0,0,0,0,0,0 },
@@ -37,6 +23,25 @@ namespace Sudoku
 			new int[]{0,0,0,0,0,0,0,0,0 },
 			new int[]{0,0,0,0,0,0,0,0,0 },
 		};
+
+		/// <summary>
+		/// Sudoku data of the game
+		/// </summary>
+		public int[][] currentSudoku =
+		{
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+			new int[]{0,0,0,0,0,0,0,0,0 },
+		};
+
+
+		public List<int[]> SolidNumbers { get; private set; }
 
 		/// <summary>
 		/// Index of randomly generated row
@@ -113,8 +118,9 @@ namespace Sudoku
 		/// <summary>
 		/// Loads data from RichTextBoxes
 		/// </summary>
-		public void LoadData()
+		public void LoadDataFromRTBs()
 		{
+			SolidNumbers = new List<int[]>();
 			for (int i = 0; i < 9; i++)
 			{
 				for (int j = 0; j < 9; j++)
@@ -123,7 +129,7 @@ namespace Sudoku
 						data[i][j] = 0;
 					else
 					{
-						SolidNumbers
+						SolidNumbers.Add(new int[] { 1, 2 });
 					}
 				}
 			}
