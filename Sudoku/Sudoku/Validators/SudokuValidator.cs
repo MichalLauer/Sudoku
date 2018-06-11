@@ -16,14 +16,16 @@ namespace SudokuApp
 			{
 				for (int j = 0; j < 9; j++)
 				{
-                    if ((!DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.currentSudoku, i)) ||
-                        !DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.currentSudoku, j)) ||
-                        !DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.currentSudoku, i, j)) ||
+                    if ((!DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, i)) ||
+                        !DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, j)) ||
+                        !DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, i, j)) ||
                         UIManager.RichTextBoxes[i, j].Text == "") && !UIManager.RichTextBoxes[i,j].ReadOnly)
 					{
 						UIManager.RichTextBoxes[i, j].BackColor = Color.Red;
 						isCorrect = false;
 					}
+					else
+						UIManager.RichTextBoxes[i, j].BackColor = Color.White;
 				}
 			}
 			return isCorrect;

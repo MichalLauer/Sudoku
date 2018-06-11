@@ -58,6 +58,8 @@ namespace SudokuApp
 
 		public void rtb_TextChanged(object sender, EventArgs e)
 		{
+			if (sudoku == null)
+				return;
 			RichTextBox rtb = (sender as RichTextBox);
 			string input = rtb.Text;
 			if (!DataValidator.IsValidInput(input))
@@ -65,26 +67,14 @@ namespace SudokuApp
 				rtb.Text = "";
 				return;
 			}
+			int x = int.Parse(rtb.Name[3].ToString());
+			int y = int.Parse(rtb.Name[5].ToString());
+			sudoku.data[x][y] = int.Parse(input);
 		}
 
 		public void btnShowSolution_Down(object sender, MouseEventArgs e)
 		{
 			UI.ShowSudoku(sudoku);
-		}
-
-		public void btnCustom_Down(object sender, MouseEventArgs e)
-		{
-			UI.ResetSudokuUI();
-			//TODO Dodelat
-		}
-
-		public void btnSolve_Down(object sender, MouseEventArgs e)
-		{
-			sudoku = new Sudoku(false, true);
-			sudoku.LoadDataFromRTBs();
-			sudoku.Generate();
-			UI.ShowSudoku(sudoku);
-			//TODO Dodelat
 		}
 	}
 }

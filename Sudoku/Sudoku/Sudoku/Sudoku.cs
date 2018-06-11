@@ -43,7 +43,7 @@ namespace SudokuApp
 		/// <summary>
 		/// Sudoku data of the game
 		/// </summary>
-		public int[][] currentSudoku =
+		public int[][] solution =
 		{
 			new int[]{0,0,0,0,0,0,0,0,0 },
 			new int[]{0,0,0,0,0,0,0,0,0 },

@@ -15,8 +15,7 @@ namespace SudokuApp
         public static void Generate(Sudoku sudoku)
         {
             Randomize(sudoku);
-			//skips first row, because it's randomly generated
-            for (int row = 0 ; row < 9;)
+			for (int row = 0 ; row < 9;)
             {
 				for (int col = 0; ;)
 				{
@@ -57,7 +56,11 @@ namespace SudokuApp
 
 				}
             }
-            
+
+			for (int i = 0; i < 9; i++)
+				for (int j = 0; j < 9; j++)
+					sudoku.solution[i][j] = sudoku.data[i][j];
+
         }
 
 		/// <summary>
@@ -80,7 +83,6 @@ namespace SudokuApp
 					DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
 				{
 					i++;
-					sudoku.metadata[row][col] = false;
 				}
 				else
 					sudoku.data[row][col] = 0;

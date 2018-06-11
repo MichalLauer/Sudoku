@@ -14,7 +14,7 @@ namespace SudokuApp
 		public static void CreateFormUI(Form form)
 		{
 			form.FormBorderStyle = FormBorderStyle.None;
-			form.Size = new Size(615, 207);
+			form.Size = new Size(415, 207);
 			form.WindowState = FormWindowState.Normal;
 			form.StartPosition = FormStartPosition.Manual;
 			form.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - form.Size.Width / 2,
@@ -40,7 +40,8 @@ namespace SudokuApp
 						Size = new Size(20, 20),
 						Margin = new Padding(0, 0, 0, 0),
 						Parent = form,
-						Location = new Point(201+x, y),
+						Name = $"rtb{i}-{j}",
+						Location = new Point(x, y),
 						SelectionAlignment = HorizontalAlignment.Center,
 						MaxLength = 1,
 						BackColor = Color.White,
@@ -61,56 +62,40 @@ namespace SudokuApp
 			Button btnReset = new Button()
 			{
 				Text = "Resetovat Sudoku",
-				Size = new Size(200, 45),
-				Location = new Point(400, 10),
+				Size = new Size(200, 30),
+				Location = new Point(200, 10),
 				Parent = form
 			};
 
 			Button btnCheck = new Button()
 			{
 				Text = "Zkontrolovat Sudoku",
-				Size = new Size(200, 45),
-				Location = new Point(400, 57),
+				Size = new Size(200, 30),
+				Location = new Point(200, 50),
 				Parent = form
 			};
 
 			Button btnGenerate = new Button()
 			{
 				Text = "Znovu vygenerovat Sudoku",
-				Size = new Size(200, 45),
-				Location = new Point(400, 105),
-				Parent = form
-			};
-
-			Button btnEnd = new Button()
-			{
-				Text = "Ukoncit Sudoku",
-				Size = new Size(200, 45),
-				Location = new Point(400, 152),
+				Size = new Size(200, 30),
+				Location = new Point(200, 90),
 				Parent = form
 			};
 
 			Button btnShowSolution = new Button()
 			{
 				Text = "Ukazat vygen. reseni",
-				Size = new Size(200, 45),
-				Location = new Point(10, 10),
+				Size = new Size(200, 30),
+				Location = new Point(200, 130),
 				Parent = form
 			};
 
-			Button btnCustom = new Button()
+			Button btnEnd = new Button()
 			{
-				Text = "Vlastni sudoku",
-				Size = new Size(200, 45),
-				Location = new Point(10, 57),
-				Parent = form
-			};
-
-			Button btnSolve = new Button()
-			{
-				Text = "Vyresit Sudoku",
-				Size = new Size(200, 45),
-				Location = new Point(10, 105),
+				Text = "Ukoncit Sudoku",
+				Size = new Size(200, 30),
+				Location = new Point(200, 170),
 				Parent = form
 			};
 
@@ -119,8 +104,6 @@ namespace SudokuApp
 			btnGenerate.MouseDown += new MouseEventHandler(form.btnGenerate_Down);
 			btnEnd.MouseDown += new MouseEventHandler(form.btnEnd_Down);
 			btnShowSolution.MouseDown += new MouseEventHandler(form.btnShowSolution_Down);
-			btnCustom.MouseDown += new MouseEventHandler(form.btnCustom_Down);
-			btnSolve.MouseDown += new MouseEventHandler(form.btnSolve_Down);
 		}
 
 		/// <summary>
@@ -147,7 +130,7 @@ namespace SudokuApp
 			{
 				for (int j = 0; j < 9; j++)
 				{
-					UIManager.RichTextBoxes[i, j].Text = sudoku.data[i][j].ToString();
+					UIManager.RichTextBoxes[i, j].Text = sudoku.solution[i][j].ToString();
 				}
 			}
 		}
@@ -172,6 +155,7 @@ namespace SudokuApp
 						UIManager.RichTextBoxes[i, j].Text = "";
 						UIManager.RichTextBoxes[i, j].ReadOnly = false;
 						UIManager.RichTextBoxes[i, j].BackColor = Color.White;
+						sudoku.data[i][j] = 0;
 					}
 
 				}
