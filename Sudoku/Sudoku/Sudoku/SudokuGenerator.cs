@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SudokuApp
@@ -15,37 +16,45 @@ namespace SudokuApp
         {
             Randomize(sudoku);
 			//skips first row, because it's randomly generated
-            for (int row = 1 ; row < 9;)
+            for (int row = 0 ; row < 9;)
             {
 				for (int col = 0; ;)
 				{
-                    sudoku.data[row][col]++;
-					//Checks if the value is acceptable
-                    if (DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, row)) &&
-                        DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
-                        DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
-                    {
-						//if is on the end of a row
-                        if (col == 8)
+					if (sudoku.data[row][col] == 0)
+						sudoku.data[row][col]++;
+					if (DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, row)) &&
+						DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
+						DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
+					{
+						if (col == 8)
 						{
+							col = 0;
 							row++;
 							break;
 						}
-						col++;
-						continue;
-					}
-					//Goes back untill you can raise the value by 1
-                    while (sudoku.data[row][col] >= 9)
-					{
-						sudoku.data[row][col] = 0;
-						if (col == 0)
-						{
-							row--;
-							col = 8;
-						}
 						else
-							col--;
+							col++;
 					}
+					else
+					{
+						while (sudoku.data[row][col] >= 9)
+						{
+							sudoku.data[row][col] = 0;
+							if (col == 0 && row == 0)
+							{
+								;
+							}
+							if (col == 0)
+							{
+								col = 8;
+								row--;
+							}
+							else
+								col--;
+						}
+						sudoku.data[row][col]++;
+					}
+
 				}
             }
             
@@ -58,14 +67,24 @@ namespace SudokuApp
         private static void Randomize(Sudoku sudoku)
         {
             Random rn = new Random();
-            for (int i = 0; i < 9;)
-            {
-                int temp = rn.Next(1, 10);
-                if (sudoku.data[0].Contains(temp))
-                    continue;
-                sudoku.data[0][i] = temp;
-                i++;
-            }
-        }
+			for (int i = 0; i < sudoku.RandomizedCount;)
+			{
+				int row = rn.Next(0, 9);
+				int col = rn.Next(0, 9);
+				if (sudoku.data[row][col] != 0)
+					continue;
+				else
+					sudoku.data[row][col] = rn.Next(1, 10);
+				if (DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, row)) &&
+					DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
+					DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
+				{
+					i++;
+					sudoku.metadata[row][col] = false;
+				}
+				else
+					sudoku.data[row][col] = 0;
+			}
+		}
     }
 }

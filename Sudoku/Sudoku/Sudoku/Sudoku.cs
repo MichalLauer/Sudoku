@@ -11,6 +11,22 @@ namespace SudokuApp
 		/// <summary>
 		/// The data of sudoku
 		/// </summary>
+		public bool[][] metadata =
+		{
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+			new bool[]{true,true,true,true,true,true,true,true,true },
+		};
+
+		/// <summary>
+		/// The data of sudoku
+		/// </summary>
 		public int[][] data =
 		{
 			new int[]{0,0,0,0,0,0,0,0,0 },
@@ -40,22 +56,31 @@ namespace SudokuApp
 			new int[]{0,0,0,0,0,0,0,0,0 },
 		};
 
-
-		public List<int[]> SolidNumbers { get; private set; }
-
 		/// <summary>
 		/// Index of randomly generated row
 		/// </summary>
 		public int VisibleElements { get; set; } = 20;
 
 		/// <summary>
+		/// How much number should be generated
+		/// </summary>
+		public int RandomizedCount { get; private set; } = 20;
+
+		/// <summary>
 		/// Public constructor
 		/// </summary>
 		/// <param name="generate">Generate new Sudoku</param>
-		public Sudoku(bool generate = false)
+		public Sudoku(bool generate = false, bool fill = false)
 		{
 			if (generate)
 				Generate();
+
+			if (fill)
+			{
+				UI.ResetSudokuUI();
+				UI.SetVisibleRichTextBoxes(this);
+				UI.FillSudoku(this);
+			}
 		}
 
 		/// <summary>
@@ -120,17 +145,11 @@ namespace SudokuApp
 		/// </summary>
 		public void LoadDataFromRTBs()
 		{
-			SolidNumbers = new List<int[]>();
 			for (int i = 0; i < 9; i++)
 			{
 				for (int j = 0; j < 9; j++)
 				{
-					if (UIManager.RichTextBoxes[i, j].Text == "")
-						data[i][j] = 0;
-					else
-					{
-						SolidNumbers.Add(new int[] { 1, 2 });
-					}
+					data[i][j] = (UIManager.RichTextBoxes[i, j].Text == "") ? 0 : int.Parse(UIManager.RichTextBoxes[i, j].Text);
 				}
 			}
 		}

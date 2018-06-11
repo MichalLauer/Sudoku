@@ -32,6 +32,7 @@ namespace SudokuApp
 			{
 				for (int j = 0; j < 9; j++)
 				{
+					//center - right - left
 					int x = (j >= 3 && j < 6) ? 14 + 20 * j : (j >= 6 && j < 9) ? 18 + 20 * j : 10 + 20 * j;
 					int y = (i >= 3 && i < 6) ? 14 + 20 * i : (i >= 6 && i < 9) ? 18 + 20 * i : 10 + 20 * i;
 					RichTextBox rtb = new RichTextBox()
@@ -43,7 +44,7 @@ namespace SudokuApp
 						SelectionAlignment = HorizontalAlignment.Center,
 						MaxLength = 1,
 						BackColor = Color.White,
-						Tag = $"{i}-{j}"
+						Tag = "Hidden"
 					};
 					rtb.TextChanged += new EventHandler(form.rtb_TextChanged);
 					UIManager.RichTextBoxes[i,j] = rtb;
@@ -51,23 +52,10 @@ namespace SudokuApp
 			}
 		}
 
-        /// <summary>
-        /// Resets Sudoku look
-        /// </summary>
-		public static void ResetSudokuUI()
-		{
-			foreach (RichTextBox item in UIManager.RichTextBoxes)
-			{
-				item.BackColor = Color.White;
-				item.Text = "";
-				item.ReadOnly = false;
-			}
-		}
-
-        /// <summary>
-        /// Create interface that user comunicates on
-        /// </summary>
-        /// <param name="form">Form to create interface on</param>
+		/// <summary>
+		/// Create interface that user comunicates on
+		/// </summary>
+		/// <param name="form">Form to create interface on</param>
 		public static void CreateInterface(Form1 form)
 		{
 			Button btnReset = new Button()
@@ -136,6 +124,20 @@ namespace SudokuApp
 		}
 
 		/// <summary>
+		/// Fully resets sudoku UI with proper Color, Text, ReadOnly and Tag
+		/// </summary>
+		public static void ResetSudokuUI()
+		{
+			foreach (RichTextBox item in UIManager.RichTextBoxes)
+			{
+				item.BackColor = Color.White;
+				item.Text = "";
+				item.ReadOnly = false;
+				item.Tag = "Hidden";
+			}
+		}
+
+		/// <summary>
 		/// Displays whole sudoku that has been generated
 		/// </summary>
 		/// <param name="sudoku">sudoku to show</param>
@@ -153,54 +155,45 @@ namespace SudokuApp
 		/// <summary>
 		/// Fills Sudoku Interface with its proper values
 		/// </summary>
-		/// <param name="sudoku">Sudoku to fill</param>
-		/// <param name="hideAll">Whether all elements should be hidden</param>
-		/// <param name="generateNew">Whether generate new visible elements</param>
-		public static void Fill(Sudoku sudoku, bool reset = false, bool generateNew = true)
+		public static void FillSudoku(Sudoku sudoku)
 		{
-			if (reset)
-				ResetSudokuUI();
-			//show random 20 elements
-			if (generateNew)
+			for (int i = 0; i < 9; i++)
 			{
-				GenerateVisibleElements(sudoku);
+				for (int j = 0; j < 9; j++)
+				{
+					if (UIManager.RichTextBoxes[i,j].Tag.ToString() == "Shown")
+					{
+						UIManager.RichTextBoxes[i, j].Text = sudoku.data[i][j].ToString();
+						UIManager.RichTextBoxes[i, j].ReadOnly = true;
+						UIManager.RichTextBoxes[i, j].BackColor = Color.FromArgb(230, 230, 230);
+					}
+					else
+					{
+						UIManager.RichTextBoxes[i, j].Text = "";
+						UIManager.RichTextBoxes[i, j].ReadOnly = false;
+						UIManager.RichTextBoxes[i, j].BackColor = Color.White;
+					}
+
+				}
 			}
-			for (int i = 0; i < sudoku.VisibleElements; i++)
-			{
-				int x = UIManager.VisibleRtbs[i, 0];
-				int y = UIManager.VisibleRtbs[i, 1];
-				UIManager.RichTextBoxes[x, y].Text = sudoku.data[x][y].ToString();
-				UIManager.RichTextBoxes[x, y].ReadOnly = true;
-				UIManager.RichTextBoxes[x, y].BackColor = Color.FromArgb(230, 230, 230);
-			}
+
 		}
 
 		/// <summary>
 		/// Generate random elements that would be shown
 		/// </summary>
 		/// <param name="sudoku"></param>
-		public static void GenerateVisibleElements(Sudoku sudoku)
+		public static void SetVisibleRichTextBoxes(Sudoku sudoku)
 		{
-			UIManager.VisibleRtbs = new int[sudoku.VisibleElements, 2];
 			Random rn = new Random();
-			bool exists;
 			for (int i = 0; i < sudoku.VisibleElements;)
 			{
 				int x = rn.Next(0, 9);
 				int y = rn.Next(0, 9);
-				exists = false;
-				for (int j = 0; j < sudoku.VisibleElements; j++)
-				{
-					if (UIManager.VisibleRtbs[j, 0] == x && UIManager.VisibleRtbs[j, 1] == y)
-					{
-						exists = true;
-						break;
-					}
-				}
-				if (exists)
+				if (UIManager.RichTextBoxes[x, y].Tag.ToString() == "Hidden")
+					UIManager.RichTextBoxes[x, y].Tag = "Shown";
+				else
 					continue;
-				UIManager.VisibleRtbs[i, 0] = x;
-				UIManager.VisibleRtbs[i, 1] = y;
 				i++;
 			}
 		}

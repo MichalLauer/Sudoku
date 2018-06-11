@@ -21,17 +21,15 @@ namespace SudokuApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-			sudoku = new Sudoku(true);
 			UI.CreateFormUI(this);
 			UI.CreateInterface(this);
 			UI.CreateSudokuUI(this);
-			UI.Fill(sudoku, true);
+			sudoku = new Sudoku(true, true);
 		}
 
 		public void btnReset_Down(object sender, MouseEventArgs e)
 		{
-			UI.ResetSudokuUI();
-			UI.Fill(sudoku, false, false);
+			UI.FillSudoku(sudoku);
 		}
 
 		public  void btnCheck_Down(object sender, MouseEventArgs e)
@@ -48,8 +46,7 @@ namespace SudokuApp
 
 		public void btnGenerate_Down(object sender, MouseEventArgs e)
 		{
-			UI.ResetSudokuUI();
-			UI.Fill(sudoku);
+			sudoku = new Sudoku(true, true);
 		}
 
 		public void btnEnd_Down(object sender, MouseEventArgs e)
@@ -68,9 +65,6 @@ namespace SudokuApp
 				rtb.Text = "";
 				return;
 			}
-			rtb.BackColor = Color.White;
-			string[] indexes = rtb.Tag.ToString().Split('-').ToArray();
-			sudoku.currentSudoku[int.Parse(indexes[0])][int.Parse(indexes[1])] = int.Parse(input);
 		}
 
 		public void btnShowSolution_Down(object sender, MouseEventArgs e)
@@ -81,14 +75,16 @@ namespace SudokuApp
 		public void btnCustom_Down(object sender, MouseEventArgs e)
 		{
 			UI.ResetSudokuUI();
+			//TODO Dodelat
 		}
 
 		public void btnSolve_Down(object sender, MouseEventArgs e)
 		{
-			sudoku = new Sudoku();
+			sudoku = new Sudoku(false, true);
 			sudoku.LoadDataFromRTBs();
 			sudoku.Generate();
 			UI.ShowSudoku(sudoku);
+			//TODO Dodelat
 		}
 	}
 }
