@@ -56,10 +56,21 @@ namespace SudokuApp
 			new int[]{0,0,0,0,0,0,0,0,0 },
 		};
 
-		/// <summary>
-		/// Index of randomly generated row
-		/// </summary>
-		public int VisibleElements { get; set; } = 20;
+        public void DisableMetadata()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    metadata[i][j] = true;
+                }
+            };
+        }
+
+        /// <summary>
+        /// Index of randomly generated row
+        /// </summary>
+        public int VisibleElements { get; set; } = 20;
 
 		/// <summary>
 		/// How much number should be generated

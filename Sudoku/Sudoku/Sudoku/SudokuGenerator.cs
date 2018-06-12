@@ -19,7 +19,19 @@ namespace SudokuApp
             {
 				for (int col = 0; ;)
 				{
-					if (sudoku.data[row][col] == 0)
+                    if (!sudoku.metadata[row][col])
+                    {
+                        if (col == 8)
+                        {
+                            col = 0;
+                            row++;
+                            break;
+                        }
+                        else
+                            col++;
+                        continue;
+                    }
+					else
 						sudoku.data[row][col]++;
 					if (DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, row)) &&
 						DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
@@ -36,12 +48,16 @@ namespace SudokuApp
 					}
 					else
 					{
-						while (sudoku.data[row][col] >= 9)
+						while (sudoku.data[row][col] >= 9 || !sudoku.metadata[row][col])
 						{
-							sudoku.data[row][col] = 0;
+                            if (sudoku.metadata[row][col])
+                                sudoku.data[row][col] = 0;
 							if (col == 0 && row == 0)
 							{
-								;
+                                sudoku.DisableMetadata();
+                                row = 0;
+                                col = 0;
+                                break;
 							}
 							if (col == 0)
 							{
@@ -51,7 +67,6 @@ namespace SudokuApp
 							else
 								col--;
 						}
-						sudoku.data[row][col]++;
 					}
 
 				}
@@ -82,6 +97,7 @@ namespace SudokuApp
 					DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, col)) &&
 					DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, row, col)))
 				{
+                    sudoku.metadata[row][col] = false;
 					i++;
 				}
 				else
