@@ -74,7 +74,7 @@ namespace SudokuApp
 		public Sudoku(bool generate = false, bool fill = false)
 		{
 			if (generate)
-				Generate();
+				GenerateSolution();
 
 			if (fill)
 			{
@@ -136,19 +136,9 @@ namespace SudokuApp
 		/// <summary>
 		/// Generates new Sudoku array
 		/// </summary>
-        public void Generate()
+        public void GenerateSolution()
         {
             this.Solution = SudokuGenerator.Generate(this).Solution;
-        }
-
-        /// <summary>
-        /// Disables metadata for complete editaion of Sudoku
-        /// </summary>
-        public void DisableMetadata()
-        {
-            for (int i = 0; i < 9; i++)
-                for (int j = 0; j < 9; j++)
-                    Metadata[i][j] = true;
         }
 
         /// <summary>

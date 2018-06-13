@@ -12,13 +12,12 @@ namespace SudokuApp
         /// Generates new sudoku
         /// </summary>
         /// <param name="sudoku"></param>
-        public static Sudoku Generate(Sudoku sudoku, bool randomize = true)
+        public static Sudoku Generate(Sudoku sudoku)
         {
             //Whether randomize sudoku (recursion)
-            if (randomize)
-                Randomize(sudoku);
+            Randomize(sudoku);
             DateTime dt = DateTime.Now;
-            bool runOut = false;
+            bool timeRanOut = false;
             for (int row = 0; row < 9;)
             {
                 for (int col = 0; ;)
@@ -26,8 +25,7 @@ namespace SudokuApp
                     //If is generating longer than # seconds
                     if (DateTime.Now.CompareTo(dt.AddSeconds(5)) > 0)
                     {
-                        runOut = true;
-                        sudoku.DisableMetadata();
+                        timeRanOut = true;
                         break;
                     }
 
@@ -63,7 +61,7 @@ namespace SudokuApp
                     }
                     else
                     {
-                        while (sudoku.Solution[row][col] >= 9 || !sudoku.Metadata[row][col])
+                        while (sudoku.Solution[row][col] == 9 || !sudoku.Metadata[row][col])
                         {
                             if (sudoku.Metadata[row][col])
                                 sudoku.Solution[row][col] = 0;
@@ -80,12 +78,12 @@ namespace SudokuApp
                     }
                 }
                 //If time ran out
-                if (runOut)
+                if (timeRanOut)
                     break;
             }
 
             //If time ran out, then Sudoku has no solution
-            if (runOut)
+            if (timeRanOut)
             {
                 sudoku = Generate(new Sudoku());
             }

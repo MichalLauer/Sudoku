@@ -24,8 +24,6 @@ namespace SudokuApp
 						UIManager.RichTextBoxes[i, j].BackColor = Color.Red;
 						isCorrect = false;
 					}
-					else
-						UIManager.RichTextBoxes[i, j].BackColor = Color.White;
 				}
 			}
 			return isCorrect;
