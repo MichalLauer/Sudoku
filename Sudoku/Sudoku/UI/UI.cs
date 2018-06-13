@@ -130,7 +130,7 @@ namespace SudokuApp
 			{
 				for (int j = 0; j < 9; j++)
 				{
-					UIManager.RichTextBoxes[i, j].Text = sudoku.solution[i][j].ToString();
+					UIManager.RichTextBoxes[i, j].Text = sudoku.Solution[i][j].ToString();
 				}
 			}
 		}
@@ -146,8 +146,9 @@ namespace SudokuApp
 				{
 					if (UIManager.RichTextBoxes[i,j].Tag.ToString() == "Shown")
 					{
-						UIManager.RichTextBoxes[i, j].Text = sudoku.data[i][j].ToString();
-						UIManager.RichTextBoxes[i, j].ReadOnly = true;
+						UIManager.RichTextBoxes[i, j].Text = sudoku.Solution[i][j].ToString();
+                        sudoku.Data[i][j] = sudoku.Solution[i][j];
+                        UIManager.RichTextBoxes[i, j].ReadOnly = true;
 						UIManager.RichTextBoxes[i, j].BackColor = Color.FromArgb(230, 230, 230);
 					}
 					else
@@ -155,7 +156,6 @@ namespace SudokuApp
 						UIManager.RichTextBoxes[i, j].Text = "";
 						UIManager.RichTextBoxes[i, j].ReadOnly = false;
 						UIManager.RichTextBoxes[i, j].BackColor = Color.White;
-						sudoku.data[i][j] = 0;
 					}
 
 				}
@@ -175,7 +175,9 @@ namespace SudokuApp
 				int x = rn.Next(0, 9);
 				int y = rn.Next(0, 9);
 				if (UIManager.RichTextBoxes[x, y].Tag.ToString() == "Hidden")
-					UIManager.RichTextBoxes[x, y].Tag = "Shown";
+                {
+                    UIManager.RichTextBoxes[x, y].Tag = "Shown";
+                }
 				else
 					continue;
 				i++;

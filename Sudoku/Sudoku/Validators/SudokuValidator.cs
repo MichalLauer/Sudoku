@@ -16,9 +16,9 @@ namespace SudokuApp
 			{
 				for (int j = 0; j < 9; j++)
 				{
-                    if ((!DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.data, i)) ||
-                        !DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.data, j)) ||
-                        !DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.data, i, j)) ||
+                    if ((!DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.Data, i)) ||
+                        !DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.Data, j)) ||
+                        !DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.Data, i, j)) ||
                         UIManager.RichTextBoxes[i, j].Text == "") && !UIManager.RichTextBoxes[i,j].ReadOnly)
 					{
 						UIManager.RichTextBoxes[i, j].BackColor = Color.Red;

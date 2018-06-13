@@ -11,7 +11,7 @@ namespace SudokuApp
 		/// <summary>
 		/// The data of sudoku
 		/// </summary>
-		public bool[][] metadata =
+		public bool[][] Metadata =
 		{
 			new bool[]{true,true,true,true,true,true,true,true,true },
 			new bool[]{true,true,true,true,true,true,true,true,true },
@@ -27,7 +27,7 @@ namespace SudokuApp
 		/// <summary>
 		/// The data of sudoku
 		/// </summary>
-		public int[][] data =
+		public int[][] Solution =
 		{
 			new int[]{0,0,0,0,0,0,0,0,0 },
 			new int[]{0,0,0,0,0,0,0,0,0 },
@@ -40,31 +40,27 @@ namespace SudokuApp
 			new int[]{0,0,0,0,0,0,0,0,0 },
 		};
 
-		/// <summary>
-		/// Sudoku data of the game
-		/// </summary>
-		public int[][] solution =
-		{
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-			new int[]{0,0,0,0,0,0,0,0,0 },
-		};
+        /// <summary>
+        /// Sudoku data of the game
+        /// </summary>
+        public int[][] Data =
+        {
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+            new int[]{0,0,0,0,0,0,0,0,0 },
+        };
 
         public void DisableMetadata()
         {
             for (int i = 0; i < 9; i++)
-            {
                 for (int j = 0; j < 9; j++)
-                {
-                    metadata[i][j] = true;
-                }
-            };
+                    Metadata[i][j] = true;
         }
 
         /// <summary>
@@ -148,7 +144,7 @@ namespace SudokuApp
 		/// </summary>
         public void Generate()
         {
-            SudokuGenerator.Generate(this);
+            this.Solution = SudokuGenerator.Generate(this).Solution;
         }
 
 		/// <summary>
@@ -160,7 +156,7 @@ namespace SudokuApp
 			{
 				for (int j = 0; j < 9; j++)
 				{
-					data[i][j] = (UIManager.RichTextBoxes[i, j].Text == "") ? 0 : int.Parse(UIManager.RichTextBoxes[i, j].Text);
+					Solution[i][j] = (UIManager.RichTextBoxes[i, j].Text == "") ? 0 : int.Parse(UIManager.RichTextBoxes[i, j].Text);
 				}
 			}
 		}
@@ -176,7 +172,7 @@ namespace SudokuApp
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
-                    output += $" {data[i][j]} ";
+                    output += $" {Solution[i][j]} ";
                 output += "\n";
             }
             return output;
