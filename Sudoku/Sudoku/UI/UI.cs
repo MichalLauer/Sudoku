@@ -109,7 +109,7 @@ namespace SudokuApp
 		/// <summary>
 		/// Fully resets sudoku UI with proper Color, Text, ReadOnly and Tag
 		/// </summary>
-		public static void ResetSudokuUI()
+		public static void ResetSudoku()
 		{
 			foreach (RichTextBox item in UIManager.RichTextBoxes)
 			{

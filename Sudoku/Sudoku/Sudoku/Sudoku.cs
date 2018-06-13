@@ -84,7 +84,7 @@ namespace SudokuApp
 
 			if (fill)
 			{
-				UI.ResetSudokuUI();
+				UI.ResetSudoku();
 				UI.SetVisibleRichTextBoxes(this);
 				UI.FillSudoku(this);
 			}

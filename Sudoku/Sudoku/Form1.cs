@@ -67,11 +67,16 @@ namespace SudokuApp
 				rtb.Text = "";
 				return;
 			}
-		}
+            //name = rtbX_Y
+            int x = int.Parse(rtb.Name[3].ToString());
+            int y = int.Parse(rtb.Name[5].ToString());
+            sudoku.Data[x][y] = int.Parse(input);
+        }
 
 		public void btnShowSolution_Down(object sender, MouseEventArgs e)
 		{
-			UI.ShowSudoku(sudoku);
+            UI.FillSudoku(sudoku);
+            UI.ShowSudoku(sudoku);
 		}
 	}
 }
