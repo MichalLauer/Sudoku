@@ -9,11 +9,12 @@ namespace SudokuApp
         private static DataValidator validator = new DataValidator();
 
         /// <summary>
-        /// Algorithm to generate new sudoku 
+        /// Generates new sudoku
         /// </summary>
         /// <param name="sudoku"></param>
         public static Sudoku Generate(Sudoku sudoku, bool randomize = true)
         {
+            //Whether randomize sudoku (recursion)
             if (randomize)
                 Randomize(sudoku);
             DateTime dt = DateTime.Now;
@@ -22,12 +23,15 @@ namespace SudokuApp
             {
                 for (int col = 0; ;)
                 {
+                    //If is generating longer than # seconds
                     if (DateTime.Now.CompareTo(dt.AddSeconds(5)) > 0)
                     {
                         runOut = true;
                         sudoku.DisableMetadata();
                         break;
                     }
+
+                    //if is editable, else ++
                     if (!sudoku.Metadata[row][col])
                     {
                         if (col == 8)
@@ -42,6 +46,8 @@ namespace SudokuApp
                     }
                     else
                         sudoku.Solution[row][col]++;
+
+                    //if is valid, else go back if 9 or uneditable
                     if (DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.Solution, row)) &&
                         DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.Solution, col)) &&
                         DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.Solution, row, col)))
@@ -73,23 +79,26 @@ namespace SudokuApp
                         }
                     }
                 }
+                //If time ran out
                 if (runOut)
                     break;
             }
 
+            //If time ran out, then Sudoku has no solution
             if (runOut)
             {
                 sudoku = Generate(new Sudoku());
             }
 
+            //return valid sudoku
             return sudoku;
 
         }
 
 		/// <summary>
-		/// Randomizes first row of the sudoku
+		/// Randomizes random # elements in Sudoku
 		/// </summary>
-		/// <param name="sudoku"></param>
+		/// <param name="sudoku">Sudoku to randomize</param>
         private static void Randomize(Sudoku sudoku)
         {
             Random rn = new Random();

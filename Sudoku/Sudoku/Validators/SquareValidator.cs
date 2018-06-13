@@ -11,11 +11,9 @@ namespace SudokuApp
 		/// <returns>Boolean of the square state</returns>
 		public override bool IsValid(int[] square)
         {
-            //remove all 0s from row
+            //Lambda
             square = square.Where(x => x != 0).ToArray();
-            //Removes all duplicates
             int[] fixedSquare = square.Distinct().ToArray();
-            //If there were no duplicates, the length is equal
             return fixedSquare.Length == square.Length;
         }
     }

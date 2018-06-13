@@ -19,7 +19,7 @@ namespace SudokuApp
                     if ((!DataValidator.RowVal.IsValid(Sudoku.GetRow(sudoku.Data, i)) ||
                         !DataValidator.ColumnVal.IsValid(Sudoku.GetColumn(sudoku.Data, j)) ||
                         !DataValidator.SquareVal.IsValid(Sudoku.GetSquare(sudoku.Data, i, j)) ||
-                        UIManager.RichTextBoxes[i, j].Text == "") && !UIManager.RichTextBoxes[i,j].ReadOnly)
+                        UIManager.RichTextBoxes[i, j].Text == "") && !UIManager.RichTextBoxes[i,j].ReadOnly) //if has number and is not ReadOnly
 					{
 						UIManager.RichTextBoxes[i, j].BackColor = Color.Red;
 						isCorrect = false;

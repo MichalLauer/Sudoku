@@ -10,23 +10,11 @@ namespace SudokuApp
     class  DataValidator
     {
 		/// <summary>
-		/// Instance of Row Validator
+		/// Instance of Row, Column, Square and Sudoku Validator
 		/// </summary>
         public static RowValidator RowVal { get; private set; } = new RowValidator();
-
-		/// <summary>
-		/// Instance of ColumnValidator
-		/// </summary>
         public static ColumnValidator ColumnVal { get; private set; } = new ColumnValidator();
-
-		/// <summary>
-		/// Instance of SquareValidator
-		/// </summary>
         public static SquareValidator SquareVal { get; private set; } = new SquareValidator();
-
-        /// <summary>
-        /// Instance of SudokuValidator
-        /// </summary>
         public static SudokuValidator SudokuVal { get; private set; } = new SudokuValidator();
 
 		/// <summary>

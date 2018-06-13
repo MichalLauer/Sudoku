@@ -11,7 +11,7 @@ namespace SudokuApp
         /// Sets Form to it's proper looks
         /// </summary>
         /// <param name="form">Form to change</param>
-		public static void CreateFormUI(Form form)
+		public static void CreateForm(Form form)
 		{
 			form.FormBorderStyle = FormBorderStyle.None;
 			form.Size = new Size(415, 207);
@@ -25,7 +25,7 @@ namespace SudokuApp
         /// Creates UI for Sudoku
         /// </summary>
         /// <param name="form">Form to create Sudoku on</param>
-		public static void CreateSudokuUI(Form1 form)
+		public static void CreateSudoku(Form1 form)
 		{
 			UIManager.RichTextBoxes = new RichTextBox[9, 9];
 			for (int i = 0; i < 9; i++)

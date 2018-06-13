@@ -21,9 +21,9 @@ namespace SudokuApp
 
         private void Form1_Load(object sender, EventArgs e)
         {
-			UI.CreateFormUI(this);
+			UI.CreateForm(this);
 			UI.CreateInterface(this);
-			UI.CreateSudokuUI(this);
+			UI.CreateSudoku(this);
 			sudoku = new Sudoku(true, true);
 		}
 

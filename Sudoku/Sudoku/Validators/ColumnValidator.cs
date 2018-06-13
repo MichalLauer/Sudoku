@@ -11,11 +11,9 @@ namespace SudokuApp
 		/// <returns>Boolean of the Column state</returns>
         public override bool IsValid(int[] column)
         {
-            //remove all 0s from row
+            //Lambda
             column = column.Where(x => x != 0).ToArray();
-            //Removes all duplicates
             int[] fixedColumn = column.Distinct().ToArray();
-            //If there were no duplicates, the length is equal
             return fixedColumn.Length == column.Length;
         }
     }
